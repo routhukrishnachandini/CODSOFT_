@@ -1,0 +1,60 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+class Course {
+    private String code;
+    private int capacity;
+    private HashMap<String, String> students; // Student ID and Name
+
+    public Course(String code, int capacity) {
+        this.code = code;
+        this.capacity = capacity;
+        this.students = new HashMap<>();
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getEnrollment() {
+        return students.size();
+    }
+
+    public boolean registerStudent(String id, String name) {
+        if (students.size() < capacity) {
+            students.put(id, name);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean dropStudent(String id) {
+        if (students.containsKey(id)) {
+            students.remove(id);
+            return true;
+        }
+        return false;
+    }
+}
+
+public class CourseRegistrationSystem {
+    public static void main(String[] args) {
+        Course cse101 = new Course("CSE101", 30);
+        Course mat201 = new Course("MAT201", 25);
+
+        cse101.registerStudent("1001", "John Doe");
+        mat201.registerStudent("1002", "Alice Smith");
+
+        System.out.println("CSE101 Enrollment: " + cse101.getEnrollment() + "/" + cse101.getCapacity());
+        System.out.println("MAT201 Enrollment: " + mat201.getEnrollment() + "/" + mat201.getCapacity());
+
+        cse101.dropStudent("1001");
+
+        System.out.println("CSE101 Enrollment after drop: " + cse101.getEnrollment() + "/" + cse101.getCapacity());
+    }
+}
+course enrollment
